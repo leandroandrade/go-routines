@@ -1,4 +1,4 @@
-package main
+package sample
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ func every500ms(c1 chan string) {
 	}
 }
 
-func everyTwoSenconds(c2 chan string) {
+func everyTwoSeconds(c2 chan string) {
 	for {
 		c2 <- "Every two seconds"
 		time.Sleep(time.Second * 2)
@@ -35,7 +35,7 @@ func main() {
 	c2 := make(chan string)
 
 	go every500ms(c1)
-	go everyTwoSenconds(c2)
+	go everyTwoSeconds(c2)
 
 	processDataChannels(c1, c2)
 }
