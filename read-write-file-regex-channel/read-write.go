@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
+	"log"
 )
 
 const numberWorkers = 8
@@ -43,7 +44,7 @@ func main() {
 	if err != nil {
 		fmt.Errorf("erro %v", err)
 	}
-	defer logger.Close()
+	//defer logger.Close()
 
 	waitGroup.Add(numberWorkers)
 
@@ -58,6 +59,18 @@ func main() {
 	for line, _, err := reader.ReadLine(); err == nil; line, _, err = reader.ReadLine() {
 		queue <- line
 	}
+
+	// use this
+	if err = logger.Close(); err != nil {
+		log.Fatalf("error when write a file: %v", err)
+	}
+
+	// or use this
+	//defer func() {
+	//	if err = logger.Close(); err != nil {
+	//		log.Fatalf("error when write a file: %v", err)
+	//	}
+	//}()
 
 	close(queue)
 	waitGroup.Wait()
