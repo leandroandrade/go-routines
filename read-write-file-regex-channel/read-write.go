@@ -60,14 +60,18 @@ func main() {
 		queue <- line
 	}
 
-	// use this
-	if err = logger.Close(); err != nil {
+	// to error, use this
+	if errClose := logger.Close(); err == nil {
+		err = errClose
+
 		log.Fatalf("error when write a file: %v", err)
 	}
 
 	// or use this
 	//defer func() {
-	//	if err = logger.Close(); err != nil {
+	//	if errClose := logger.Close(); err == nil {
+	//		err = errClose
+	//
 	//		log.Fatalf("error when write a file: %v", err)
 	//	}
 	//}()
