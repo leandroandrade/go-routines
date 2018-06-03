@@ -1,2 +1,3 @@
 # go-routines
-Examples using goroutines
+
+Examples using goroutines and channel.
