@@ -63,16 +63,18 @@ func main() {
 	// to error, use this
 	if errClose := logger.Close(); err == nil {
 		err = errClose
-
-		log.Fatalf("error when write a file: %v", err)
+		if err != nil {
+			log.Fatalf("error when write a file: %v", err)
+		}
 	}
 
 	// or use this
 	//defer func() {
 	//	if errClose := logger.Close(); err == nil {
 	//		err = errClose
-	//
-	//		log.Fatalf("error when write a file: %v", err)
+	//		if err != nil {
+	//			log.Fatalf("error when write a file: %v", err)
+	//		}
 	//	}
 	//}()
 
